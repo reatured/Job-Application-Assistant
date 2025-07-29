@@ -35,34 +35,9 @@ export default async function handler(req, res) {
       return res.status(response.status).json({ error: errorText });
     }
 
-    // Handle streaming response
-    if (req.body.stream) {
-      res.writeHead(200, {
-        'Content-Type': 'text/plain',
-        'Transfer-Encoding': 'chunked',
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
-      });
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-
-      try {
-        while (true) {
-          const { done, value } = await reader.read();
-          
-          if (done) break;
-          
-          const chunk = decoder.decode(value, { stream: true });
-          res.write(chunk);
-        }
-      } finally {
-        res.end();
-      }
-    } else {
-      const data = await response.json();
-      res.json(data);
-    }
+    // Handle non-streaming response
+    const data = await response.json();
+    res.json(data);
   } catch (error) {
     console.error('Proxy error:', error);
     res.status(500).json({ error: error.message });

@@ -44,31 +44,9 @@ app.post('/api/perplexity/chat/completions', async (req, res) => {
       return res.status(response.status).json({ error: errorText });
     }
 
-    // Handle streaming response
-    if (req.body.stream) {
-      res.writeHead(200, {
-        'Content-Type': 'text/plain',
-        'Transfer-Encoding': 'chunked',
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
-      });
-
-      response.body.on('data', (chunk) => {
-        res.write(chunk);
-      });
-
-      response.body.on('end', () => {
-        res.end();
-      });
-
-      response.body.on('error', (err) => {
-        console.error('Stream error:', err);
-        res.end();
-      });
-    } else {
-      const data = await response.json();
-      res.json(data);
-    }
+    // Handle non-streaming response
+    const data = await response.json();
+    res.json(data);
   } catch (error) {
     console.error('Proxy error:', error);
     res.status(500).json({ error: error.message });
