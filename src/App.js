@@ -9,7 +9,6 @@ function App() {
   const [draftAnswer, setDraftAnswer] = useState('');
   const [additionalComments, setAdditionalComments] = useState('Edit this to sound like a real person, not AI. Keep it concise. No fluff, no exaggeration, no made-up skills. No typos. If this version wouldn’t help me land the job, it’s useless.');
   const [response, setResponse] = useState('');
-  const [fullMessage, setFullMessage] = useState('');
   const [message, setMessage] = useState('');
   const [sessionCost, setSessionCost] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +24,6 @@ function App() {
     const savedDraftAnswer = localStorage.getItem('draftAnswer');
     const savedAdditionalComments = localStorage.getItem('additionalComments');
     const savedResponse = localStorage.getItem('response');
-    const savedFullMessage = localStorage.getItem('fullMessage');
     const savedMessage = localStorage.getItem('message');
     const savedSessionCost = localStorage.getItem('sessionCost');
 
@@ -35,7 +33,6 @@ function App() {
     if (savedDraftAnswer) setDraftAnswer(savedDraftAnswer);
     if (savedAdditionalComments) setAdditionalComments(savedAdditionalComments);
     if (savedResponse) setResponse(savedResponse);
-    if (savedFullMessage) setFullMessage(savedFullMessage);
     if (savedMessage) setMessage(savedMessage);
     if (savedSessionCost) setSessionCost(parseFloat(savedSessionCost));
   }, []);
@@ -69,11 +66,6 @@ function App() {
   const saveResponse = (value) => {
     setResponse(value);
     localStorage.setItem('response', value);
-  };
-
-  const saveFullMessage = (value) => {
-    setFullMessage(value);
-    localStorage.setItem('fullMessage', value);
   };
 
   const saveMessage = (value) => {
@@ -184,7 +176,6 @@ function App() {
 
     setIsLoading(true);
     saveResponse('');
-    saveFullMessage('');
     saveMessage('');
 
     const prompt = `Job Description:\n${jobDescription}\n\nResume:\n${resume}\n\nQuestion:\n${question}\n\nDraft Answer:\n${draftAnswer}\n\nAdditional Comments:\n${additionalComments}\n\nPlease provide an improved answer for this job application question based on the job description and resume. Consider the additional comments provided.`;
@@ -199,9 +190,6 @@ function App() {
       console.log('Main question API response:', result);
       
       if (result.success) {
-        // Save the response content to fullMessage
-        saveFullMessage(result.message);
-        
         // Save token usage information to message
         if (result.usage) {
           const currentCost = calculateCost(result.usage);
