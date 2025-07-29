@@ -46,6 +46,12 @@ app.post('/api/perplexity/chat/completions', async (req, res) => {
 
     // Handle non-streaming response
     const data = await response.json();
+    
+    // Log token usage if available
+    if (data.usage) {
+      console.log('Token usage:', JSON.stringify(data.usage, null, 2));
+    }
+    
     res.json(data);
   } catch (error) {
     console.error('Proxy error:', error);

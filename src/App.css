@@ -52,8 +52,8 @@
   flex-direction: column;
 }
 
-.answer-section {
-  flex: 1;
+.answer-section, .message-section{
+  
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -110,6 +110,7 @@
   margin-bottom: 10px;
   font-size: 1.1rem;
   margin-top: 0;
+  display: flex;
 }
 
 .response-content {

@@ -50,7 +50,8 @@ export const callPerplexityAPI = async (prompt, onChunk, apiKey = null) => {
     return {
       success: true,
       message: fullMessage,
-      citations: data.citations || []
+      citations: data.citations || [],
+      usage: data.usage || null
     };
   } catch (error) {
     console.error('Perplexity API call failed:', error);
