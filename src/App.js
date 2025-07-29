@@ -7,7 +7,7 @@ function App() {
   const [resume, setResume] = useState('');
   const [question, setQuestion] = useState('');
   const [draftAnswer, setDraftAnswer] = useState('');
-  const [additionalComments, setAdditionalComments] = useState('');
+  const [additionalComments, setAdditionalComments] = useState('Edit this cover letter to sound like a real person, not AI. Keep it concise. No fluff, no exaggeration, no made-up skills. No typos. If this version wouldn’t help me land the job, it’s useless.');
   const [response, setResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSummarizingJob, setIsSummarizingJob] = useState(false);
@@ -113,6 +113,11 @@ function App() {
     }
   };
 
+  const handleCoverLetterClick = () => {
+    saveQuestion('Cover Letter');
+    saveDraftAnswer('Search what the company do. Mention I am interested in working at this industry and my skills and knoweledge are great for this job');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!question.trim()) return;
@@ -183,8 +188,10 @@ function App() {
           </div>
     
           <div className="middle-panel">
+            
             <div className="question-section">
               <h3>Question</h3>
+              <button onClick={handleCoverLetterClick} className="cover-letter-button">Cover Letter</button>
               <textarea
                 value={question}
                 onChange={(e) => saveQuestion(e.target.value)}
@@ -193,26 +200,27 @@ function App() {
               />
             </div>
             
-            <div className="draft-section">
+            <div className="draft-section" style={{flex: 1}}>
               <h3>Draft Answer</h3>
               <textarea
                 value={draftAnswer}
                 onChange={(e) => saveDraftAnswer(e.target.value)}
                 placeholder="Paste your draft answer here..."
-                className="panel-textarea small"
+                className="panel-textarea"
               />
+              
               
             </div>
             
             
             
-            <div className="comments-section">
+            <div className="comments-section" style={{flex: 1}}>
               <h3>Additional Comments</h3>
               <textarea
                 value={additionalComments}
                 onChange={(e) => saveAdditionalComments(e.target.value)}
                 placeholder="Add any additional context or specific requirements..."
-                className="panel-textarea small"
+                className="panel-textarea "
               />
             </div>
 
@@ -224,12 +232,20 @@ function App() {
               {isLoading ? 'Generating...' : 'Generate Improved Answer'}
             </button>
             
-            <div className="answer-section">
+            
+          </div>
+
+          <div className="right-panel">
+          <div className="answer-section">
               <h3>Improved Answer</h3>
-              <div className="response-content">
-                {response || 'Click "Generate Improved Answer" to get an AI-improved response.'}
-              </div>
+              <textarea
+                value={response || ''}
+                onChange={(e) => saveResponse(e.target.value)}
+                placeholder='Click "Generate Improved Answer" to get an AI-improved response.'
+                className="panel-textarea response-textarea"
+              />
             </div>
+
           </div>
 
           

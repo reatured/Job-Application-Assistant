@@ -7,7 +7,7 @@
 
 .App-container {
   flex: 1;
-  max-width: 1400px;
+ 
   margin: 0 auto;
   background: white;
   border-radius: 10px;
@@ -26,7 +26,7 @@
 
 .main-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   flex: 1;
   min-height: 0;
@@ -151,4 +151,28 @@
 .summarize-button:disabled {
   background-color: #6c757d;
   cursor: not-allowed;
+}
+
+.cover-letter-button {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-bottom: 10px;
+  width: auto;
+  display: inline-block;
+}
+
+.cover-letter-button:hover {
+  background-color: #138496;
+}
+
+.response-textarea {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  resize: vertical;
 }
