@@ -7,7 +7,7 @@ function App() {
   const [resume, setResume] = useState('');
   const [question, setQuestion] = useState('');
   const [draftAnswer, setDraftAnswer] = useState('');
-  const [additionalComments, setAdditionalComments] = useState('Edit this cover letter to sound like a real person, not AI. Keep it concise. No fluff, no exaggeration, no made-up skills. No typos. If this version wouldn’t help me land the job, it’s useless.');
+  const [additionalComments, setAdditionalComments] = useState('Edit this to sound like a real person, not AI. Keep it concise. No fluff, no exaggeration, no made-up skills. No typos. If this version wouldn’t help me land the job, it’s useless.');
   const [response, setResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSummarizingJob, setIsSummarizingJob] = useState(false);
