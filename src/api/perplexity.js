@@ -1,4 +1,6 @@
-const PERPLEXITY_API_URL = 'http://localhost:3001/api/perplexity/chat/completions';
+const PERPLEXITY_API_URL = process.env.NODE_ENV === 'production' 
+  ? '/api/proxy' 
+  : 'http://localhost:3001/api/perplexity/chat/completions';
 
 export const callPerplexityAPI = async (prompt, onChunk, apiKey = null) => {
   try {
