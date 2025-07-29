@@ -15,7 +15,7 @@
   ],
   "routes": [
     {
-      "src": "/api/perplexity/(.*)",
+      "src": "/api/proxy",
       "dest": "/api/proxy.js"
     },
     {
